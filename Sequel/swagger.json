@@ -1,0 +1,254 @@
+{
+  "x-generator": "NSwag v13.8.2.0 (NJsonSchema v10.2.1.0 (Newtonsoft.Json v12.0.0.0))",
+  "openapi": "3.0.0",
+  "info": {
+    "title": "My Title",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/Thing/GetAllThingsQuery": {
+      "get": {
+        "tags": [
+          "GetAllThingsQuery"
+        ],
+        "operationId": "GetAllThingsQuery_Query",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResultOfThingOf"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Thing/CreateThingWithOtherStuffsCommand/CanExecute": {
+      "post": {
+        "tags": [
+          "CreateThingWithOtherStuffsCommand"
+        ],
+        "operationId": "CreateThingWithOtherStuffsCommand_CanExecute",
+        "requestBody": {
+          "x-name": "args",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateThingWithOtherStuffsCommandArgs"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Thing/CreateThingWithOtherStuffsCommand/Execute": {
+      "post": {
+        "tags": [
+          "CreateThingWithOtherStuffsCommand"
+        ],
+        "operationId": "CreateThingWithOtherStuffsCommand_Execute",
+        "requestBody": {
+          "x-name": "args",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateThingWithOtherStuffsCommandArgs"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResultOfGuid"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "OperationResultOfThingOf": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "entity": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Thing"
+            }
+          },
+          "status": {
+            "$ref": "#/components/schemas/OperationStatus"
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Thing": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "otherStuffs": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/OtherStuff"
+            }
+          }
+        }
+      },
+      "OtherStuff": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "thingId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "OperationStatus": {
+        "type": "integer",
+        "description": "0 = None\n1 = Success\n2 = EntityNotFound\n3 = EntityCreated\n4 = InvalidArguments\n5 = Error",
+        "x-enumNames": [
+          "None",
+          "Success",
+          "EntityNotFound",
+          "EntityCreated",
+          "InvalidArguments",
+          "Error"
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "ValidationResult": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OperationResult"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "OperationResult": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/OperationStatus"
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "CreateThingWithOtherStuffsCommandArgs": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "otherStuffs": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/CreateOtherStuffArgs"
+            }
+          }
+        }
+      },
+      "CreateOtherStuffArgs": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "OperationResultOfGuid": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "entity": {
+            "type": "string",
+            "format": "guid"
+          },
+          "status": {
+            "$ref": "#/components/schemas/OperationStatus"
+          },
+          "messages": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
